@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PropellerLoader</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="input">
+    <textarea id="editor">{{
+	Welcome.spin
+
+    This is a Test
+}}
+
+CON
+
+
+	_clkmode = xtal1 + pll16x                             ' use crystal x 16
+	_xinfreq = 5_000_000                                  ' 5 MHz cyrstal (sys clock = 80 MHz)
+
+PUB main
+
+'' Makes IO23 blink at one second intervals
+
+DIRA[23]~~
+
+repeat
+	!OUTA[23]
+    waitcnt(clkfreq+cnt)
+
+    </textarea>
+  </div>
+
+
+  <script src="assets/js/SerialPort.js"></script>
+  <script src="assets/js/propeller.js"></script>
+  <script src="assets/js/propeller-loader.js"></script>
+  <!--<script src="main.js"></script>-->
+</body>
+</html>
