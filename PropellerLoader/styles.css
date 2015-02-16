@@ -1,1 +1,11 @@
 /* CSS file placeholder. */
+#log{
+  margin: 20px;
+  padding: 20px;
+  background: black;
+  color: white;
+  font-family: monospace;
+  max-height: 500px;
+  overflow: auto;
+  white-space: nowrap;
+}

@@ -1,35 +1,28 @@
-var text = '';
 window.onload = function() {
-  // Get the text from the textarea
-  text = document.getElementById("editor").value;
+  document.querySelector('#Load').addEventListener("click",function(){
+    load();
+  });
+  document.querySelector('#Clear').addEventListener("click",function(){
+    document.querySelector('#log').innerText = "";
+  });
+  document.querySelector('#Port').addEventListener("change",function(){
+    log("port change");
+    serial.options.port = document.querySelector('#Port').value;
+  });
 
+  // Load up serial ports
+  serial.listPorts()
+  .then(function(ports){
+    var select = document.querySelector('#Port');
+    select.innerHTML = '';
+    for(var i = 0; i<ports.length; i++){
+      option = document.createElement( 'option' );
+      option.value = option.text = ports[i].path;
+      select.add( option );
+    }
+    select.value = ports[0].path;
+  })
+  .catch(function(err){
+    log(err.message);
+  });
 };
-
-
-
-// Test the ChromeSerialPort
-
-ChromeSerialPort.listPorts()
-
-.then(function(ports){
-
-  console.log("Connecting to "+ports[0].path);
-  ChromeSerialPort.options.port = ports[0].path;
-  return ChromeSerialPort.open();
-
-})
-.then(function(){
-  // We want to have it automatically convert strings for us.
-  return ChromeSerialPort.write("Hello, World!", true);
-})
-.then(function(){
- //return ChromeSerialPort.close();
-})
-.then(
-  function(){
-    //console.log("Disconnected!");
-  },
-  function(err){
-    console.log(err);
-  }
-);
